@@ -73,6 +73,10 @@
             <groupId>${alfresco.groupId}</groupId>
             <artifactId>alfresco-repository</artifactId>
         </dependency>
+        <dependency>
+            <groupId>${alfresco.groupId}</groupId>
+            <artifactId>alfresco-remote-api</artifactId>
+        </dependency>
     </dependencies>
     <profiles>
     	<!-- Enterprise profile, manually activated, automatically adds support for Enterprise edition development (dependencies) -->
