@@ -13,7 +13,12 @@
 <beans>
 
 	<bean id="webscript.workflow.workflow-undeploy-definition.get"
-		class="org.alfresco.repo.web.scripts.workflow.WorkflowUndeployDefinitionGet"
+		class="org.orderofthebee.repo.web.scripts.workflow.WorkflowUndeployDefinitionGet"
+		parent="abstractWorkflowWebScript">
+	</bean>
+
+	<bean id="webscript.workflow.workflow-delete.post"
+		class="org.orderofthebee.repo.web.scripts.workflow.WorkflowDeletePost"
 		parent="abstractWorkflowWebScript">
 	</bean>
 
