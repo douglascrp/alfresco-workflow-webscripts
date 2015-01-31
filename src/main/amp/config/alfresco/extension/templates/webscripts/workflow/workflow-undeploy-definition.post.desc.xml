@@ -8,5 +8,5 @@
 	<format default="json" />
 	<authentication>user</authentication>
 	<transaction allow="readonly">required</transaction>
-	<lifecycle>public_api</lifecycle>
+	<lifecycle>bees_api</lifecycle>
 </webscript>

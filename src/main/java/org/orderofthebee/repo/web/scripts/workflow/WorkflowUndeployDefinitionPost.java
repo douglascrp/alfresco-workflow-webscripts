@@ -14,7 +14,7 @@ import org.springframework.extensions.webscripts.WebScriptException;
 import org.springframework.extensions.webscripts.WebScriptRequest;
 
 
-public class WorkflowUndeployDefinitionGet extends AbstractWorkflowWebscript {
+public class WorkflowUndeployDefinitionPost extends AbstractWorkflowWebscript {
 	private static final String PARAM_WORKFLOW_DEFINITION_ID = "workflowDefinitionId";
 
 	@Override

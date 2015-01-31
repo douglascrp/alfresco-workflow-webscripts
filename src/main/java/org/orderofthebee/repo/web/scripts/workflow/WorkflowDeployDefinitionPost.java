@@ -7,44 +7,40 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.alfresco.repo.web.scripts.workflow.AbstractWorkflowWebscript;
 import org.alfresco.repo.web.scripts.workflow.WorkflowModelBuilder;
+import org.alfresco.service.cmr.repository.NodeRef;
+import org.alfresco.service.cmr.repository.StoreRef;
 import org.alfresco.service.cmr.workflow.WorkflowDefinition;
+import org.alfresco.service.cmr.workflow.WorkflowDeployment;
 import org.alfresco.service.cmr.workflow.WorkflowInstance;
 import org.springframework.extensions.webscripts.Cache;
 import org.springframework.extensions.webscripts.Status;
 import org.springframework.extensions.webscripts.WebScriptException;
 import org.springframework.extensions.webscripts.WebScriptRequest;
 
-public class WorkflowDeletePost extends AbstractWorkflowWebscript {
-	private static final String PARAM_WORKFLOW_ID = "workflowId";
+/**
+ * Takes a string representation of a NodeRef and deploys the workflow definition found there
+ * TODO needs a bunch of error checking
+ * @author martian
+ *
+ */
+public class WorkflowDeployDefinitionPost extends AbstractWorkflowWebscript {
+	private static final Object PARAM_WORKFLOW_DEFINITION = "workflowDefinition";
 
 	@Override
 	protected Map<String, Object> buildModel(WorkflowModelBuilder modelBuilder,
 			WebScriptRequest req, Status status, Cache cache) {
 
-		// copy some stuff from alfresco WorkflowUndeployDefinitionGet
-
 		Map<String, String> params = req.getServiceMatch().getTemplateVars();
 
-		// Get the definition id from the params
-		String workflowId = params.get(PARAM_WORKFLOW_ID);
-//		System.out.println("workflowId = " + workflowId);
+		String workflowDefinition = params.get(PARAM_WORKFLOW_DEFINITION);
 
-		WorkflowInstance workflow = workflowService
-				.getWorkflowById(workflowId);
+		WorkflowDeployment deployed = workflowService.deployDefinition(new NodeRef(workflowDefinition));
 
-		// Workflow definition is not found, 404
-		if (workflow == null) {
-			throw new WebScriptException(HttpServletResponse.SC_NOT_FOUND,
-					"Unable to find workflow with id: " + workflowId);
-		}
-
-		workflowService.deleteWorkflow(workflowId);
-
-		
-		
 		Map<String, Object> model = new HashMap<String, Object>();
-		model.put("result", "Workflow  " + workflowId
+		model.put("result", "Deployed definition  " + workflowDefinition
 				+ " deleted");
+		model.put("workflowDefinitionId", deployed.getDefinition().getId());
+
 		return model;
 
 	}
