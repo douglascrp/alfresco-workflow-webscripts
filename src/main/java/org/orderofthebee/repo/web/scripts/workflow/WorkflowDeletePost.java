@@ -40,6 +40,8 @@ public class WorkflowDeletePost extends AbstractWorkflowWebscript {
 
 		workflowService.deleteWorkflow(workflowId);
 
+		
+		
 		Map<String, Object> model = new HashMap<String, Object>();
 		model.put("result", "Workflow  " + workflowId
 				+ " deleted");

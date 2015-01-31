@@ -12,13 +12,22 @@
 	language governing permissions and limitations under the License. -->
 <beans>
 
-	<bean id="webscript.workflow.workflow-undeploy-definition.get"
-		class="org.orderofthebee.repo.web.scripts.workflow.WorkflowUndeployDefinitionGet"
+	<bean id="webscript.workflow.workflow-undeploy-definition.post"
+		class="org.orderofthebee.repo.web.scripts.workflow.WorkflowUndeployDefinitionPost"
+		parent="abstractWorkflowWebScript">
+	</bean>
+	<bean id="webscript.workflow.workflow-dedeploy-definition.post"
+		class="org.orderofthebee.repo.web.scripts.workflow.WorkflowDeployDefinitionPost"
 		parent="abstractWorkflowWebScript">
 	</bean>
 
 	<bean id="webscript.workflow.workflow-delete.post"
 		class="org.orderofthebee.repo.web.scripts.workflow.WorkflowDeletePost"
+		parent="abstractWorkflowWebScript">
+	</bean>
+
+	<bean id="webscript.workflow.workflow-create.post"
+		class="org.orderofthebee.repo.web.scripts.workflow.WorkflowCreatePost"
 		parent="abstractWorkflowWebScript">
 	</bean>
 
