@@ -26,9 +26,4 @@
 		parent="abstractWorkflowWebScript">
 	</bean>
 
-	<bean id="webscript.workflow.workflow-create.post"
-		class="org.orderofthebee.repo.web.scripts.workflow.WorkflowCreatePost"
-		parent="abstractWorkflowWebScript">
-	</bean>
-
 </beans>
