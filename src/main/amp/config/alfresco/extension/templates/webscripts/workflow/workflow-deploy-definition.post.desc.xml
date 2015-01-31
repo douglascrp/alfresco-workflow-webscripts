@@ -1,9 +1,9 @@
 <webscript>
-	<shortname>Undeploy the workflow definition</shortname>
+	<shortname>Deploy a workflow definition</shortname>
 	<description>
-		Undeploy the workflow definition.
+		Deploy a workflow definition found at a NodeRef in the repository.
 	</description>
-	<url>/bees-api/workflow-undeploy-definition?workflowDefinitionId={workflowDefinitionId}
+	<url>/bees-api/workflow-deploy-definition?workflowDefinitionNodeRef={workflowDefinitionNodeRef}
 	</url>
 	<format default="json" />
 	<authentication>user</authentication>
