@@ -1,0 +1,11 @@
+<webscript>
+	<shortname>List active workflows</shortname>
+	<description>
+	List all active workflows, or just those matching a given workflowDefinitionId if one is passed in
+	</description>
+	<url>/bees-api/list-active-workflows?workflowDefinitionId={workflowDefinitionId?}</url>
+	<format default="json" />
+	<authentication>user</authentication>
+	<transaction allow="readonly">required</transaction>
+	<lifecycle>bees_api</lifecycle>
+</webscript>

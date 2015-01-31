@@ -77,6 +77,11 @@
             <groupId>${alfresco.groupId}</groupId>
             <artifactId>alfresco-remote-api</artifactId>
         </dependency>
+        <dependency>
+        	<groupId>org.springframework.extensions.surf</groupId>
+        	<artifactId>spring-webscripts-api</artifactId>
+        	<version>5.0.c</version>
+        </dependency>
     </dependencies>
     <profiles>
     	<!-- Enterprise profile, manually activated, automatically adds support for Enterprise edition development (dependencies) -->
