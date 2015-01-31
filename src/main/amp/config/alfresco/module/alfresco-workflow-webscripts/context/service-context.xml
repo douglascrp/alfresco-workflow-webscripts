@@ -16,7 +16,7 @@
 		class="org.orderofthebee.repo.web.scripts.workflow.WorkflowUndeployDefinitionPost"
 		parent="abstractWorkflowWebScript">
 	</bean>
-	<bean id="webscript.workflow.workflow-dedeploy-definition.post"
+	<bean id="webscript.workflow.workflow-deploy-definition.post"
 		class="org.orderofthebee.repo.web.scripts.workflow.WorkflowDeployDefinitionPost"
 		parent="abstractWorkflowWebScript">
 	</bean>
