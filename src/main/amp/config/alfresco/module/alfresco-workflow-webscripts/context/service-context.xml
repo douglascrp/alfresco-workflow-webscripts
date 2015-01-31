@@ -26,4 +26,9 @@
 		parent="abstractWorkflowWebScript">
 	</bean>
 
+	<bean id="webscript.workflow.list-active-workflows.get"
+		class="org.orderofthebee.repo.web.scripts.workflow.ListActiveWorkflowsGet"
+		parent="abstractWorkflowWebScript">
+	</bean>
+
 </beans>
