@@ -85,25 +85,7 @@
 			<artifactId>spring-webscripts-api</artifactId>
 			<version>5.0.c</version>
 		</dependency>
-		<dependency>
-			<groupId>org.alfresco</groupId>
-			<artifactId>alfresco-remote-api</artifactId>
-			<version>5.0.c</version>
-			<classifier>tests</classifier>
-		</dependency>
 
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-test</artifactId>
-			<version>4.1.4.RELEASE</version>
-		</dependency>
-
-
-		<dependency>
-			<groupId>org.springframework.extensions.surf</groupId>
-			<artifactId>spring-surf</artifactId>
-			<version>1.2.0-M14</version>
-		</dependency>
 	</dependencies>
 	<profiles>
 		<!-- Enterprise profile, manually activated, automatically adds support 
