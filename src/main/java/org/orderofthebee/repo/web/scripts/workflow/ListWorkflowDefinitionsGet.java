@@ -5,18 +5,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletResponse;
-
 import org.alfresco.repo.web.scripts.workflow.AbstractWorkflowWebscript;
 import org.alfresco.repo.web.scripts.workflow.WorkflowModelBuilder;
-import org.alfresco.service.cmr.repository.NodeRef;
-import org.alfresco.service.cmr.repository.StoreRef;
 import org.alfresco.service.cmr.workflow.WorkflowDefinition;
-import org.alfresco.service.cmr.workflow.WorkflowDeployment;
-import org.alfresco.service.cmr.workflow.WorkflowInstance;
 import org.springframework.extensions.webscripts.Cache;
 import org.springframework.extensions.webscripts.Status;
-import org.springframework.extensions.webscripts.WebScriptException;
 import org.springframework.extensions.webscripts.WebScriptRequest;
 
 /**
@@ -27,13 +20,12 @@ import org.springframework.extensions.webscripts.WebScriptRequest;
  *
  */
 public class ListWorkflowDefinitionsGet extends AbstractWorkflowWebscript {
-	private static final String PARAM_WORKFLOW_DEFINITION_ID = "workflowDefinitionId";
 
 	@Override
 	protected Map<String, Object> buildModel(WorkflowModelBuilder modelBuilder,
 			WebScriptRequest req, Status status, Cache cache) {
 
-		Map<String, String> params = req.getServiceMatch().getTemplateVars();
+//		Map<String, String> params = req.getServiceMatch().getTemplateVars();
 
 		
 		List<WorkflowDefinition> defs = workflowService.getAllDefinitions();
