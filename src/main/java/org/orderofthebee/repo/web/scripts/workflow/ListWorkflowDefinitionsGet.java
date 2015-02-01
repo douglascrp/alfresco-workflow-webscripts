@@ -26,7 +26,7 @@ import org.springframework.extensions.webscripts.WebScriptRequest;
  * @author martian
  *
  */
-public class ListActiveWorkflowsGet extends AbstractWorkflowWebscript {
+public class ListWorkflowDefinitionsGet extends AbstractWorkflowWebscript {
 	private static final String PARAM_WORKFLOW_DEFINITION_ID = "workflowDefinitionId";
 
 	@Override
@@ -35,37 +35,27 @@ public class ListActiveWorkflowsGet extends AbstractWorkflowWebscript {
 
 		Map<String, String> params = req.getServiceMatch().getTemplateVars();
 
-		String workflowDefinitionId = params.get(PARAM_WORKFLOW_DEFINITION_ID);
-
-		List<WorkflowInstance> workflows;
-		if(null!=workflowDefinitionId){
-			workflows = workflowService.getActiveWorkflows(workflowDefinitionId);
-			
-		} else {
-			workflows = workflowService.getActiveWorkflows();
-			
-		}
 		
-		List<Map<String, Object>> workflowsOut = new ArrayList<Map<String, Object>>();
-		for(WorkflowInstance workflow : workflows){
+		List<WorkflowDefinition> defs = workflowService.getAllDefinitions();
+		
+		
+		List<Map<String, Object>> defsOut = new ArrayList<Map<String, Object>>();
+		for(WorkflowDefinition wDef : defs){
 			HashMap<String, Object> out = new HashMap<String, Object>();
-			out.put("active", workflow.isActive());
-			out.put("context", workflow.getContext());
-			out.put("definition", workflow.getDefinition());
-			out.put("description", workflow.getDescription());
-			out.put("dueDate", workflow.getDueDate());
-			out.put("endDate", workflow.getEndDate());
-			out.put("id", workflow.getId());
-			out.put("initiator", workflow.getInitiator());
-			out.put("priority", workflow.getPriority());
-			out.put("startDate", workflow.getStartDate());
-			out.put("workflowPackage", workflow.getWorkflowPackage());
+
+			out.put("description", wDef.getDescription());
+			out.put("id", wDef.getId());
+			out.put("name", wDef.getName());
+			out.put("startTaskDefinition", wDef.getStartTaskDefinition());
+			out.put("title", wDef.getTitle());
+			out.put("version", wDef.getVersion());
+		
 			
-			workflowsOut.add(out);
+			defsOut.add(out);
 		}
 		
 		Map<String, Object> model = new HashMap<String, Object>();
-		model.put("workflows", workflowsOut);
+		model.put("definitions", defsOut);
 		return model;
 
 	}

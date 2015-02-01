@@ -1,9 +1,9 @@
 <webscript>
-	<shortname>Delete a workflow</shortname>
+	<shortname>Start a workflow</shortname>
 	<description>
-		Delete a workflow.
+		Start a workflow.
 	</description>
-	<url>/bees-api/workflow-delete?workflowId={workflowId}</url>
+	<url>/bees-api/workflow-start?workflowDefinitionId={workflowDefinitionId}</url>
 	<format default="json" />
 	<authentication>user</authentication>
 	<transaction allow="readonly">required</transaction>
