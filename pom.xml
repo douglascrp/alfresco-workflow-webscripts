@@ -85,7 +85,26 @@
 			<artifactId>spring-webscripts-api</artifactId>
 			<version>5.0.c</version>
 		</dependency>
+		<dependency>
+			<groupId>com.jayway.restassured</groupId>
+			<artifactId>rest-assured</artifactId>
+			<version>2.4.0</version>
+			<exclusions>
+				<!-- Exclude Groovy because of classpath issue -->
+				<exclusion>
+					<groupId>org.codehaus.groovy</groupId>
+					<artifactId>groovy</artifactId>
+				</exclusion>
+			</exclusions>
 
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.groovy</groupId>
+			<artifactId>groovy-all</artifactId>
+			<!-- Needs to be the same version that REST Assured depends on -->
+			<version>2.1.2</version>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 	<profiles>
 		<!-- Enterprise profile, manually activated, automatically adds support 
