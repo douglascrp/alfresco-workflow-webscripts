@@ -8,5 +8,5 @@
 	<format default="json" />
 	<authentication>user</authentication>
 	<transaction allow="readonly">required</transaction>
-	<lifecycle>public_api</lifecycle>
+	<family>Order Of The Bee</family>
 </webscript>

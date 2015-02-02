@@ -11,9 +11,13 @@
 	OF ANY KIND, either express or implied. See the License for the specific 
 	language governing permissions and limitations under the License. -->
 <beans>
+	<bean id="webscript.workflow.workflow-undeploy-definition.post"
+		class="org.orderofthebee.repo.web.scripts.workflow.WorkflowUndeployDefinitionPost"
+		parent="abstractWorkflowWebScript">
+	</bean>
 
-	<bean id="webscript.workflow.workflow-undeploy-definition.get"
-		class="org.orderofthebee.repo.web.scripts.workflow.WorkflowUndeployDefinitionGet"
+	<bean id="webscript.workflow.workflow-deploy-definition.post"
+		class="org.orderofthebee.repo.web.scripts.workflow.WorkflowDeployDefinitionPost"
 		parent="abstractWorkflowWebScript">
 	</bean>
 
@@ -22,4 +26,21 @@
 		parent="abstractWorkflowWebScript">
 	</bean>
 
+
+	<bean id="webscript.workflow.list-active-workflows.get"
+		class="org.orderofthebee.repo.web.scripts.workflow.ListActiveWorkflowsGet"
+		parent="abstractWorkflowWebScript">
+	</bean>
+
+	<bean id="webscript.workflow.workflow-start.post"
+		class="org.orderofthebee.repo.web.scripts.workflow.WorkflowStartPost"
+		parent="abstractWorkflowWebScript">
+	</bean>
+
+
+	<bean id="webscript.workflow.list-workflow-definitions.get"
+		class="org.orderofthebee.repo.web.scripts.workflow.ListWorkflowDefinitionsGet"
+		parent="abstractWorkflowWebScript">
+	</bean>
+	<!-- -->
 </beans>
