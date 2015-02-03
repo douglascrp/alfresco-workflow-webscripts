@@ -79,7 +79,7 @@ public class WebScriptHelper {
 		}
 	}
 
-	public JSONObject getJsonFromInputStream(InputStream is) throws IOException, JSONException{
+	public JSONObject readJsonFromInputStream(InputStream is) throws IOException, JSONException{
 		try {
 			BufferedReader rd = new BufferedReader(new InputStreamReader(is,
 					Charset.forName("UTF-8")));
@@ -106,8 +106,9 @@ public class WebScriptHelper {
 				String key = it.next();
 				data.add(new BasicNameValuePair(key, bodyParameters.get(key)));
 			}			
+			post.setEntity(new UrlEncodedFormEntity(data));
 		}
-		post.setEntity(new UrlEncodedFormEntity(data));
+		
 		
 		client.execute(post);
 		
@@ -128,5 +129,6 @@ public class WebScriptHelper {
 		}
 		return text;
 	}
+
 
 }

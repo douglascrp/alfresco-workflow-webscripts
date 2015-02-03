@@ -1,6 +1,6 @@
 package org.orderofthebee.workflow;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -10,6 +10,8 @@ import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
+import org.eclipse.jetty.util.log.Log;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -21,6 +23,8 @@ import org.orderofthebee.workflow.meta.TestMeta;
 
 public class TestStartListDeleteWorkflow {
 
+	private static Logger log = Logger.getLogger(TestStartListDeleteWorkflow.class);
+	
 	private static final String ADHOC_WF_NAME = "activiti$activitiAdhoc";
 	
 	private static WebScriptHelper helper;
@@ -45,6 +49,8 @@ public class TestStartListDeleteWorkflow {
 		}
 		assertNotNull("Finding id failed for wf def name: " + ADHOC_WF_NAME, wfdid);
 	}
+
+	private String activeWorkflowId;
 	
 	@Before
 	public void setup() throws Exception{
@@ -62,15 +68,46 @@ public class TestStartListDeleteWorkflow {
 		String result = helper.readAll(rd);
 		System.out.println(result);
 
+		JSONObject res = helper.readJsonFromInputStream(is);
+		assertNotNull(res);
+		assertNotNull(res.getString("id"));
+		assertNotEquals((res.getString("id")), "");
+		
+		activeWorkflowId = res.getString("id");
+		log.debug(activeWorkflowId);
 	}
 	
 	@After
-	public void tearDown(){
-		
+	public void tearDown() throws IOException{
+		String url = baseUrl + "bees-api/workflow-delete?workflowId=" + activeWorkflowId;
+		helper.post(url);
 	}
 	
 	@Test
-	public void testStartWorkflow() throws Exception{
-			}
+	public void testListWorkflowOnce() throws Exception {
+		doListTest();
+	}
+	@Test
+	public void testListWorkflowTwice() throws Exception {
+		doListTest();
+	}
+	@Test
+	public void testListWorkflowThrice() throws Exception {
+		doListTest();
+	}
+	
+	public void doListTest() throws Exception {
+		String url = baseUrl + "bees-api/list-active-workflows?workflowDefinitionId=" + wfdid;
+		JSONObject res = helper.readJsonFromUrl(url);
+		assertNotNull(res);
+		assertNotNull(res.getJSONArray("data"));
+		JSONArray data = res.getJSONArray("data");
+		
+		assertEquals(data.length(), 1);
+		
+		JSONObject item = data.getJSONObject(0);
+		
+		assertEquals(activeWorkflowId, item.get("id"));
+	}
 	
 }
