@@ -27,6 +27,7 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.orderofthebee.workflow.meta.TestMeta;
 
 public class WebScriptHelper {
 
@@ -78,6 +79,18 @@ public class WebScriptHelper {
 		}
 	}
 
+	public JSONObject getJsonFromInputStream(InputStream is) throws IOException, JSONException{
+		try {
+			BufferedReader rd = new BufferedReader(new InputStreamReader(is,
+					Charset.forName("UTF-8")));
+			String jsonText = readAll(rd);
+			JSONObject json = new JSONObject(jsonText);
+			return json;
+		} finally {
+			is.close();
+		}
+	}
+	
 	public InputStream post(String url) throws IOException {
 		return this.post(url, null);
 	}

@@ -14,10 +14,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.After;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.orderofthebee.workflow.meta.TestMeta;
 
-public class TestStartWorkflow {
+public class TestStartListDeleteWorkflow {
 
 	private static final String ADHOC_WF_NAME = "activiti$activitiAdhoc";
 	
@@ -44,14 +46,8 @@ public class TestStartWorkflow {
 		assertNotNull("Finding id failed for wf def name: " + ADHOC_WF_NAME, wfdid);
 	}
 	
-	
-	@After
-	public void tearDown(){
-		
-	}
-	
-	@Test
-	public void testStartWorkflow() throws Exception{
+	@Before
+	public void setup() throws Exception{
 		String url = baseUrl + "bees-api/workflow-start?workflowDefinitionId=" + wfdid;
 		url += "&bpmAssigneeName=" + TestMeta.START_WF_USER;
 		
@@ -65,6 +61,16 @@ public class TestStartWorkflow {
 				Charset.forName("UTF-8")));
 		String result = helper.readAll(rd);
 		System.out.println(result);
+
 	}
+	
+	@After
+	public void tearDown(){
+		
+	}
+	
+	@Test
+	public void testStartWorkflow() throws Exception{
+			}
 	
 }

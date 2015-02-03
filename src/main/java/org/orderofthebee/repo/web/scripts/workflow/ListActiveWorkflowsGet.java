@@ -8,8 +8,9 @@ import java.util.Map;
 
 import org.alfresco.repo.web.scripts.workflow.AbstractWorkflowWebscript;
 import org.alfresco.repo.web.scripts.workflow.WorkflowModelBuilder;
-import org.alfresco.service.cmr.repository.NodeRef;
 import org.alfresco.service.cmr.workflow.WorkflowInstance;
+import org.joda.time.format.DateTimeFormatter;
+import org.joda.time.format.ISODateTimeFormat;
 import org.springframework.extensions.webscripts.Cache;
 import org.springframework.extensions.webscripts.Status;
 import org.springframework.extensions.webscripts.WebScriptRequest;
@@ -67,8 +68,8 @@ public class ListActiveWorkflowsGet extends AbstractWorkflowWebscript {
 
 	private String formatDate(Date date) {
 		if (date==null) return null;
-		
-		return date.toString();
+		DateTimeFormatter fmt = ISODateTimeFormat.dateTime();
+		return fmt.print(date.getTime());
 	}
 	
 

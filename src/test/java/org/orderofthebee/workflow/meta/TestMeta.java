@@ -1,4 +1,4 @@
-package org.orderofthebee.workflow;
+package org.orderofthebee.workflow.meta;
 
 public class TestMeta {
 
