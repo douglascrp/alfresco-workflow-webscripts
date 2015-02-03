@@ -1,21 +1,21 @@
 {	
 	"data": [
-	<#if workflows?has_content>
-	<#list workflows as w>
+<#if workflows?has_content>
+<#list workflows as w>
 		{
 			"id": "${w.id}",		
-			"active": "${w.active}",		
-			"context": "${w.context}",		
+			"active": ${w.active?c},		
+			"context": "${w.context!""}",		
 			"definition": "${w.definition}",		
-			"description": "${w.description}",		
-			"dueDate": "${w.dueDate}",		
-			"endDate": "${w.endDate}",		
+			"description": "${w.description!""}",		
+			"dueDate": "${w.dueDate!""}",		
+			"endDate": "${w.endDate!""}",		
 			"initiator": "${w.initiator}",		
-			"priority": "${w.priority}",		
-			"startDate": "${w.startDate}",		
-			"workflowPackage": "${w.workflowPackage}",		
+			"priority": "${w.priority!""}",		
+			"startDate": "${w.startDate!""}",		
+			"workflowPackage": "${w.workflowPackage!""}",		
 		}<#if (w_index+1) < workflows?size>,</#if>
-	</#list>
-	</#if>
+</#list>
+</#if>
 	]
 }

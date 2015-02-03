@@ -1,12 +1,14 @@
 package org.orderofthebee.repo.web.scripts.workflow;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.alfresco.repo.web.scripts.workflow.AbstractWorkflowWebscript;
 import org.alfresco.repo.web.scripts.workflow.WorkflowModelBuilder;
+import org.alfresco.service.cmr.repository.NodeRef;
 import org.alfresco.service.cmr.workflow.WorkflowInstance;
 import org.springframework.extensions.webscripts.Cache;
 import org.springframework.extensions.webscripts.Status;
@@ -46,12 +48,12 @@ public class ListActiveWorkflowsGet extends AbstractWorkflowWebscript {
 			out.put("context", workflow.getContext());
 			out.put("definition", workflow.getDefinition());
 			out.put("description", workflow.getDescription());
-			out.put("dueDate", workflow.getDueDate());
-			out.put("endDate", workflow.getEndDate());
+			out.put("dueDate", formatDate(workflow.getDueDate()));
+			out.put("endDate", formatDate(workflow.getEndDate()));
 			out.put("id", workflow.getId());
-			out.put("initiator", workflow.getInitiator());
+			out.put("initiator", workflow.getInitiator().toString());
 			out.put("priority", workflow.getPriority());
-			out.put("startDate", workflow.getStartDate());
+			out.put("startDate", formatDate(workflow.getStartDate()));
 			out.put("workflowPackage", workflow.getWorkflowPackage());
 			
 			workflowsOut.add(out);
@@ -62,5 +64,12 @@ public class ListActiveWorkflowsGet extends AbstractWorkflowWebscript {
 		return model;
 
 	}
+
+	private String formatDate(Date date) {
+		if (date==null) return null;
+		
+		return date.toString();
+	}
+	
 
 }

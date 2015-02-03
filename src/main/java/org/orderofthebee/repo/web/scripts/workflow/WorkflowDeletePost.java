@@ -20,14 +20,11 @@ public class WorkflowDeletePost extends AbstractWorkflowWebscript {
 	protected Map<String, Object> buildModel(WorkflowModelBuilder modelBuilder,
 			WebScriptRequest req, Status status, Cache cache) {
 
-		// copy some stuff from alfresco WorkflowUndeployDefinitionGet
-
 		Map<String, String> params = req.getServiceMatch().getTemplateVars();
 
 		// Get the definition id from the params
-		String workflowId = params.get(PARAM_WORKFLOW_ID);
-//		System.out.println("workflowId = " + workflowId);
-
+		String workflowId = req.getParameter(PARAM_WORKFLOW_ID);
+		
 		WorkflowInstance workflow = workflowService
 				.getWorkflowById(workflowId);
 
@@ -39,8 +36,6 @@ public class WorkflowDeletePost extends AbstractWorkflowWebscript {
 
 		workflowService.deleteWorkflow(workflowId);
 
-		
-		
 		Map<String, Object> model = new HashMap<String, Object>();
 		model.put("result", "Workflow  " + workflowId
 				+ " deleted");

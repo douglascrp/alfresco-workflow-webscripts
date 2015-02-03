@@ -6,6 +6,9 @@ import java.util.Map;
 
 import org.alfresco.repo.web.scripts.workflow.AbstractWorkflowWebscript;
 import org.alfresco.repo.web.scripts.workflow.WorkflowModelBuilder;
+import org.alfresco.repo.workflow.WorkflowModel;
+import org.alfresco.service.cmr.repository.NodeRef;
+import org.alfresco.service.cmr.security.PersonService;
 import org.alfresco.service.cmr.workflow.WorkflowPath;
 import org.alfresco.service.namespace.QName;
 import org.apache.log4j.Logger;
@@ -16,6 +19,8 @@ import org.springframework.extensions.webscripts.WebScriptRequest;
 public class WorkflowStartPost extends AbstractWorkflowWebscript {
 	private static final String PARAM_WORKFLOW_DEFINITION_ID = "workflowDefinitionId";
 
+	private static final String PARAM_BPM_ASSIGNEE_NAME = "bpmAssigneeName";
+
 	private Logger log = Logger.getLogger(WorkflowStartPost.class);
 	
 	@Override
@@ -24,26 +29,37 @@ public class WorkflowStartPost extends AbstractWorkflowWebscript {
 
 		// copy some stuff from alfresco WorkflowUndeployDefinitionGet
 
-		log.info("Starting buildmodel");
-		
+		log.warn("Starting buildmodel");
+		log.warn(req.getServiceMatch().getTemplate());
 		Map<String, String> params = req.getServiceMatch().getTemplateVars();
 
+		log.warn(req.getContextPath());
+		for(String paramName: req.getParameterNames()){
+			log.warn("param name " + paramName);
+		}
+		
+		
+		
 		for(String key: params.keySet()){
-			log.info("key=" + key + ", val=" + params.get(key));
+			log.warn("key=" + key + ", val=" + params.get(key));
 		}
 		
 		// Get the definition id from the params
-		String workflowDefinitionId = params.get(PARAM_WORKFLOW_DEFINITION_ID);
+		String workflowDefinitionId = req.getParameter(PARAM_WORKFLOW_DEFINITION_ID);
+		String bpmAssigneeName = req.getParameter(PARAM_BPM_ASSIGNEE_NAME);
+		
+		
+		log.warn("workflow definition id = " + workflowDefinitionId);
+		
+		Map<QName, Serializable> workflowProps = new HashMap<QName, Serializable>();
+		
+		NodeRef person = personService.getPerson(bpmAssigneeName);
 
-		log.info("workflow definition id = " + workflowDefinitionId);
+		workflowProps.put(WorkflowModel.ASSOC_ASSIGNEE, person);
 		
-		Map<QName, Serializable> wparams = new HashMap<QName, Serializable>();
+		WorkflowPath wf = workflowService.startWorkflow(workflowDefinitionId, workflowProps);
 		
-		// TODO no idea what to pass for wparams
-		
-		WorkflowPath wf = workflowService.startWorkflow(workflowDefinitionId, wparams);
-		
-		log.info("workflow id" + wf.getId());
+		log.warn("workflow id" + wf.getId());
 		
 		Map<String, Object> model = new HashMap<String, Object>();
 		
