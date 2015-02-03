@@ -1,3 +1,5 @@
 {
-   "result": "${result!""}"
+	"id": "${id!""}",
+	"instance": "${instance!""}",
+	"node": "${node!""}"
 }

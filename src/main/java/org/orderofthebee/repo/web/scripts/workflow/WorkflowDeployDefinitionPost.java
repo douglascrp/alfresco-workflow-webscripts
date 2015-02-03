@@ -30,6 +30,9 @@ public class WorkflowDeployDefinitionPost extends AbstractWorkflowWebscript {
 
 		WorkflowDeployment deployed = workflowService.deployDefinition(new NodeRef(workflowDefinition));
 
+		// other way of deploying would be:
+		//workflowService.deployDefinition(engineId, workflowDefinition, mimetype, name)
+		
 		Map<String, Object> model = new HashMap<String, Object>();
 		model.put("result", "Deployed definition  " + workflowDefinition
 				+ " deleted");
