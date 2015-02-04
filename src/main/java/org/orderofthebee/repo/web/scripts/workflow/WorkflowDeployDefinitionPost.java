@@ -7,6 +7,7 @@ import org.alfresco.repo.web.scripts.workflow.AbstractWorkflowWebscript;
 import org.alfresco.repo.web.scripts.workflow.WorkflowModelBuilder;
 import org.alfresco.service.cmr.repository.NodeRef;
 import org.alfresco.service.cmr.workflow.WorkflowDeployment;
+import org.apache.log4j.Logger;
 import org.springframework.extensions.webscripts.Cache;
 import org.springframework.extensions.webscripts.Status;
 import org.springframework.extensions.webscripts.WebScriptRequest;
@@ -20,9 +21,13 @@ import org.springframework.extensions.webscripts.WebScriptRequest;
 public class WorkflowDeployDefinitionPost extends AbstractWorkflowWebscript {
 	private static final Object PARAM_WORKFLOW_DEFINITION = "workflowDefinition";
 
+	private static Logger log = Logger.getLogger(WorkflowDeployDefinitionPost.class);
+
 	@Override
 	protected Map<String, Object> buildModel(WorkflowModelBuilder modelBuilder,
 			WebScriptRequest req, Status status, Cache cache) {
+		log.debug("starting buildModel");
+		log.debug(req.toString());
 
 		Map<String, String> params = req.getServiceMatch().getTemplateVars();
 
@@ -38,8 +43,10 @@ public class WorkflowDeployDefinitionPost extends AbstractWorkflowWebscript {
 				+ " deleted");
 		model.put("workflowDefinitionId", deployed.getDefinition().getId());
 
-		return model;
 
+		log.debug("finish buildModel");
+		
+		return model;
 	}
 
 }

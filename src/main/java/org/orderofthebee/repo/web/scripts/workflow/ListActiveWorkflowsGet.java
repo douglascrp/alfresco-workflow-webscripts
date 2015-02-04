@@ -9,6 +9,8 @@ import java.util.Map;
 import org.alfresco.repo.web.scripts.workflow.AbstractWorkflowWebscript;
 import org.alfresco.repo.web.scripts.workflow.WorkflowModelBuilder;
 import org.alfresco.service.cmr.workflow.WorkflowInstance;
+import org.apache.log4j.Logger;
+import org.eclipse.jetty.util.log.Log;
 import org.joda.time.format.DateTimeFormatter;
 import org.joda.time.format.ISODateTimeFormat;
 import org.springframework.extensions.webscripts.Cache;
@@ -25,9 +27,15 @@ import org.springframework.extensions.webscripts.WebScriptRequest;
 public class ListActiveWorkflowsGet extends AbstractWorkflowWebscript {
 	private static final String PARAM_WORKFLOW_DEFINITION_ID = "workflowDefinitionId";
 
+	private static Logger log = Logger.getLogger(ListActiveWorkflowsGet.class);
+	
+	
 	@Override
 	protected Map<String, Object> buildModel(WorkflowModelBuilder modelBuilder,
 			WebScriptRequest req, Status status, Cache cache) {
+		
+		log.debug("starting buildModel");
+		log.debug(req.toString());
 
 		Map<String, String> params = req.getServiceMatch().getTemplateVars();
 
@@ -62,6 +70,9 @@ public class ListActiveWorkflowsGet extends AbstractWorkflowWebscript {
 		
 		Map<String, Object> model = new HashMap<String, Object>();
 		model.put("workflows", workflowsOut);
+
+		log.debug("finish buildModel");
+		
 		return model;
 
 	}

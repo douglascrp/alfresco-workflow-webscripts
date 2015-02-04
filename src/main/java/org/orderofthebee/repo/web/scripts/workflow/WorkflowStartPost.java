@@ -27,10 +27,9 @@ public class WorkflowStartPost extends AbstractWorkflowWebscript {
 	protected Map<String, Object> buildModel(WorkflowModelBuilder modelBuilder,
 			WebScriptRequest req, Status status, Cache cache) {
 
-		// copy some stuff from alfresco WorkflowUndeployDefinitionGet
+		log.debug("starting buildModel - status " + status.getCode());
+		log.debug(req.toString());
 
-		log.warn("Starting buildmodel");
-		log.warn(req.getServiceMatch().getTemplate());
 		Map<String, String> params = req.getServiceMatch().getTemplateVars();
 
 		// Get the definition id from the params
@@ -48,14 +47,15 @@ public class WorkflowStartPost extends AbstractWorkflowWebscript {
 		
 		Map<String, Object> model = new HashMap<String, Object>();
 		
+		log.debug("started workflow " + wf.getId());
 		
 		model.put("id", wf.getId());
 		model.put("instance", wf.getInstance());
 		model.put("node", wf.getNode());
 
+		log.debug("finish buildModel");
 		
 		return model;
-
 	}
 
 }

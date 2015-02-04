@@ -34,7 +34,12 @@ public class TestStartListDeleteWorkflow {
 	
 	@BeforeClass
 	public static void setupClass() throws IOException, JSONException{
+		
+		log.warn("setupClass");
+
 		helper = new WebScriptHelper(TestMeta.AUTH_USER, TestMeta.AUTH_PASSWORD);
+		
+		
 		JSONObject json = helper.readJsonFromUrl(baseUrl + "bees-api/list-workflow-definitions");
 
 		JSONArray data = (JSONArray) json.get("data");
@@ -48,12 +53,19 @@ public class TestStartListDeleteWorkflow {
 			}
 		}
 		assertNotNull("Finding id failed for wf def name: " + ADHOC_WF_NAME, wfdid);
+		
+		
+		log.warn("setupClass done");
+
 	}
 
 	private String activeWorkflowId;
 	
 	@Before
 	public void setup() throws Exception{
+		
+		log.warn("setup");
+		
 		String url = baseUrl + "bees-api/workflow-start?workflowDefinitionId=" + wfdid;
 		url += "&bpmAssigneeName=" + TestMeta.START_WF_USER;
 		
@@ -65,8 +77,6 @@ public class TestStartListDeleteWorkflow {
 		
 		BufferedReader rd = new BufferedReader(new InputStreamReader(is,
 				Charset.forName("UTF-8")));
-		String result = helper.readAll(rd);
-		System.out.println(result);
 
 		JSONObject res = helper.readJsonFromInputStream(is);
 		assertNotNull(res);
@@ -74,13 +84,21 @@ public class TestStartListDeleteWorkflow {
 		assertNotEquals((res.getString("id")), "");
 		
 		activeWorkflowId = res.getString("id");
-		log.debug(activeWorkflowId);
+
+	
+		log.warn("setup done");
+
 	}
 	
 	@After
 	public void tearDown() throws IOException{
+		
+		log.warn("tearDown");
+		
 		String url = baseUrl + "bees-api/workflow-delete?workflowId=" + activeWorkflowId;
 		helper.post(url);
+		log.warn("tearDown done");
+
 	}
 	
 	@Test
@@ -97,6 +115,7 @@ public class TestStartListDeleteWorkflow {
 	}
 	
 	public void doListTest() throws Exception {
+		log.warn("doListTest");
 		String url = baseUrl + "bees-api/list-active-workflows?workflowDefinitionId=" + wfdid;
 		JSONObject res = helper.readJsonFromUrl(url);
 		assertNotNull(res);
@@ -108,6 +127,9 @@ public class TestStartListDeleteWorkflow {
 		JSONObject item = data.getJSONObject(0);
 		
 		assertEquals(activeWorkflowId, item.get("id"));
+		
+		log.warn("doListTest done");
+
 	}
 	
 }
