@@ -1,17 +1,16 @@
 package org.orderofthebee.workflow;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNotNull;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
-import java.util.HashMap;
-import java.util.Map;
 
 import org.apache.log4j.Logger;
-import org.eclipse.jetty.util.log.Log;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -20,11 +19,13 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.orderofthebee.workflow.meta.TestMeta;
+import org.orderofthebee.workflow.meta.WebScriptHelper;
 
 public class TestStartListDeleteWorkflow {
 
 	private static Logger log = Logger.getLogger(TestStartListDeleteWorkflow.class);
-	
+	private String activeWorkflowId;
+
 	private static final String ADHOC_WF_NAME = "activiti$activitiAdhoc";
 	
 	private static WebScriptHelper helper;
@@ -59,7 +60,6 @@ public class TestStartListDeleteWorkflow {
 
 	}
 
-	private String activeWorkflowId;
 	
 	@Before
 	public void setup() throws Exception{
