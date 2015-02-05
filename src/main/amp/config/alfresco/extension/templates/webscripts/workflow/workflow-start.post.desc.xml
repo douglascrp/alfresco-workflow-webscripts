@@ -3,7 +3,7 @@
 	<description>
 		Start a workflow.
 	</description>
-	<url>/bees-api/workflow-start?workflowDefinitionId={workflowDefinitionId}&amp;bpmAssigneeName={bpmAssigneeName}</url>
+	<url>/bees-api/workflow-start?workflowDefinitionId={workflowDefinitionId}&amp;bpmAssigneeName={bpmAssigneeName?}</url>
 	<format default="json" />
 	<authentication>user</authentication>
 	<transaction allow="readonly">required</transaction>

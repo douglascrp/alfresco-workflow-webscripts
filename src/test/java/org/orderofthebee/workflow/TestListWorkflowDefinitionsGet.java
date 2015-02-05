@@ -1,12 +1,9 @@
 package org.orderofthebee.workflow;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 
 import java.io.IOException;
 
-import org.hamcrest.Matchers;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -14,6 +11,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.orderofthebee.workflow.meta.TestMeta;
+import org.orderofthebee.workflow.meta.WebScriptHelper;
 
 public class TestListWorkflowDefinitionsGet {
 

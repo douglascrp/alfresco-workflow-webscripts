@@ -27,29 +27,15 @@ public class WorkflowStartPost extends AbstractWorkflowWebscript {
 	protected Map<String, Object> buildModel(WorkflowModelBuilder modelBuilder,
 			WebScriptRequest req, Status status, Cache cache) {
 
-		// copy some stuff from alfresco WorkflowUndeployDefinitionGet
+		log.debug("starting buildModel - status " + status.getCode());
+		log.debug(req.toString());
 
-		log.warn("Starting buildmodel");
-		log.warn(req.getServiceMatch().getTemplate());
 		Map<String, String> params = req.getServiceMatch().getTemplateVars();
 
-		log.warn(req.getContextPath());
-		for(String paramName: req.getParameterNames()){
-			log.warn("param name " + paramName);
-		}
-		
-		
-		
-		for(String key: params.keySet()){
-			log.warn("key=" + key + ", val=" + params.get(key));
-		}
-		
 		// Get the definition id from the params
 		String workflowDefinitionId = req.getParameter(PARAM_WORKFLOW_DEFINITION_ID);
 		String bpmAssigneeName = req.getParameter(PARAM_BPM_ASSIGNEE_NAME);
 		
-		
-		log.warn("workflow definition id = " + workflowDefinitionId);
 		
 		Map<QName, Serializable> workflowProps = new HashMap<QName, Serializable>();
 		
@@ -59,18 +45,17 @@ public class WorkflowStartPost extends AbstractWorkflowWebscript {
 		
 		WorkflowPath wf = workflowService.startWorkflow(workflowDefinitionId, workflowProps);
 		
-		log.warn("workflow id" + wf.getId());
-		
 		Map<String, Object> model = new HashMap<String, Object>();
 		
+		log.debug("started workflow " + wf.getId());
 		
 		model.put("id", wf.getId());
 		model.put("instance", wf.getInstance());
 		model.put("node", wf.getNode());
 
+		log.debug("finish buildModel");
 		
 		return model;
-
 	}
 
 }
