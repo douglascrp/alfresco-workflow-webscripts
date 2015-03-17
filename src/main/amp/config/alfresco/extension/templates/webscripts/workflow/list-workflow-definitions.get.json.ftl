@@ -8,7 +8,7 @@
 			"name": "${d.name}",
 			"startTaskDefinition": "${d.startTaskDefinition}",
 			"title": "${d.title}",
-			"version": "${d.version}",
+			"version": "${d.version}"
 	}<#if (d_index+1) < definitions?size>,</#if>
 	</#list>
 	</#if>	
