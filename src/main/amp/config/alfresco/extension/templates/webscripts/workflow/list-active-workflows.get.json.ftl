@@ -13,8 +13,8 @@
 			"initiator": "${w.initiator}",		
 			"priority": "${w.priority!""}",		
 			"startDate": "${w.startDate!""}",		
-			"workflowPackage": "${w.workflowPackage!""}",		
-		}<#if (w_index+1) < workflows?size>,</#if>
+			"workflowPackage": "${w.workflowPackage!""}"		
+		}<#if w_has_next>,</#if>
 </#list>
 </#if>
 	]
