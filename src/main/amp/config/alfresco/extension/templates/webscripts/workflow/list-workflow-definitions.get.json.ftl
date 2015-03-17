@@ -9,7 +9,7 @@
 			"startTaskDefinition": "${d.startTaskDefinition}",
 			"title": "${d.title}",
 			"version": "${d.version}"
-	}<#if (d_index+1) < definitions?size>,</#if>
+	}<#if d_has_next>,</#if>
 	</#list>
 	</#if>	
 ]}
