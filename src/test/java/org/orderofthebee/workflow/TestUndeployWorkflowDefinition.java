@@ -16,6 +16,7 @@ import org.orderofthebee.workflow.meta.WebScriptHelper;
 public class TestUndeployWorkflowDefinition {
 
 	private static final String HELLO_WORLD_WORKFLOW_DEF = "activiti$helloWorld";
+	private static final String HELLO_WORLD_WORKFLOW_PATH = "alfresco/extension/workflows/helloWorld.bpmn";
 
 	String baseUrl = TestMeta.BASE_URL;
 
@@ -35,16 +36,19 @@ public class TestUndeployWorkflowDefinition {
 
 		data = (JSONArray) json.get("data");
 		hellowWorldWorkflowId = getHelloWorldWorkflowId();
+		
+		if (hellowWorldWorkflowId == null) {
+			deployHelloWorldWorkflowDefinition();
+		}
 	}
 
-	public String getHelloWorldWorkflowId() throws IOException,
-			JSONException {
+	public String getHelloWorldWorkflowId() throws IOException, JSONException {
 
 		JSONObject json = helper.readJsonFromUrl(baseUrl
 				+ "bees-api/list-workflow-definitions");
 
 		data = (JSONArray) json.get("data");
-		
+
 		for (int i = 0; i < data.length(); i++) {
 			JSONObject item = (JSONObject) data.get(i);
 			if (HELLO_WORLD_WORKFLOW_DEF.equals(item.getString("name"))) {
@@ -53,15 +57,26 @@ public class TestUndeployWorkflowDefinition {
 		}
 		return null;
 	}
-	
+
+	public void deployHelloWorldWorkflowDefinition() throws IOException,
+			JSONException {
+		String url = baseUrl
+				+ "bees-api/workflow-deploy-definition?workflowDefinitionPath="
+				+ HELLO_WORLD_WORKFLOW_PATH;
+		helper.post(url);
+	}
+
 	@Test
 	public void testUndeployHelloWorldWorkflow() throws IOException,
 			JSONException {
 
-		String url = baseUrl + "bees-api/workflow-undeploy-definition?workflowDefinitionId=" + hellowWorldWorkflowId;
+		String url = baseUrl
+				+ "bees-api/workflow-undeploy-definition?workflowDefinitionId="
+				+ hellowWorldWorkflowId;
 		helper.post(url);
-		
-		assertNull(HELLO_WORLD_WORKFLOW_DEF + " undeployied", getHelloWorldWorkflowId());
+
+		assertNull(HELLO_WORLD_WORKFLOW_DEF + " undeployed",
+				getHelloWorldWorkflowId());
 	}
 
 }
