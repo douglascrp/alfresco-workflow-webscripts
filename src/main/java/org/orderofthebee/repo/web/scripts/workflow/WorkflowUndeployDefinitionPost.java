@@ -29,7 +29,8 @@ public class WorkflowUndeployDefinitionPost extends AbstractWorkflowWebscript {
 		log.debug(req.toString());
 
 		// Get the definition id from the params
-		String workflowDefinitionId = params.get(PARAM_WORKFLOW_DEFINITION_ID);
+		String workflowDefinitionId = req.getParameter(PARAM_WORKFLOW_DEFINITION_ID);
+		
 		System.out.println("workflowDefinitionId = " + workflowDefinitionId);
 
 		WorkflowDefinition workflowDefinition = workflowService
